@@ -37,7 +37,7 @@ import com.google.api.services.docs.v1.model.Document;
 
 import lk.sliit.ssd.service.DocsQuickstart;
 
-@Controller
+//@Controller
 public class DemoController {
 
 	private static final String TOKENS_DIRECTORY_PATH = "tokens";

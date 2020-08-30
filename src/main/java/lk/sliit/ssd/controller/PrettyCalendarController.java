@@ -56,9 +56,10 @@ public class PrettyCalendarController {
 		}
 	}
 
-	@GetMapping("/event")
-	public String showEventPage() throws Exception {
-		return "calendar_event";
+	@GetMapping("/add_calendar_event")
+	public String showEventPage(Model model) throws Exception {
+		model.addAttribute("calendarEvent", new CalendarEvent());
+		return "add_calendar_event";
 	}
 	
 	/**

@@ -24,18 +24,21 @@
     <div class="d-flex p-3 justify-content-center flex-column">
 
       <!-- Start list event page -->
-      <a href="/event" class="btn btn-info btn-lg w-25">Add new event</a>
+      <a href="/add_calendar_event" class="btn btn-info btn-lg w-25">Add new event</a>
       <div class="container w-75 bg-light">
       <!-- If event list is not null -->
         <div th:if="${events != null and !events.empty}">
         <div class="row row-cols-4">
           <div class="card col m-3" th:each="event : ${events}" style="border-top: 3px solid blue !important;">
             <div class="card-body">
+        <a th:href="${event.htmlLink}">
               <h5 class="card-title" th:text="${event.summary}"></h5>
+            </a>
               <h6 class="card-subtitle mb-2 text-muted" th:text="${event.start}"></h6>
               <p class="card-text" th:text="${event.description}"></p>
             </div>
           </div>
+          
         </div>
         </div>
         <!-- else event list is null -->

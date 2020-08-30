@@ -4,6 +4,10 @@
 package lk.sliit.ssd.service.impl;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,10 +18,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.util.DateTime;
-import com.google.api.client.util.store.DataStoreFactory;
 import com.google.api.services.calendar.Calendar;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.EventAttendee;
@@ -68,7 +70,7 @@ public class GoogleCalendarService implements CalendarService {
 				}
 				// model.addAttribute("name", String.format("%s (%s)\n", event.getSummary(),
 				// start));
-				System.out.printf("%s [%s] (%s)\n", event.getSummary(),event.getDescription(), start);
+				System.out.printf("%s [%s] {%s} (%s)\n", event.getSummary(),event.getDescription(), event.getHtmlLink(), start);
 			}
 		}
 		return items;
@@ -78,19 +80,26 @@ public class GoogleCalendarService implements CalendarService {
 		Event event = new Event().setSummary(calendarEvent.getTitle()).setLocation(calendarEvent.getLocation())
 				.setDescription(calendarEvent.getDescription());
 
-		DateTime startDateTime = new DateTime("2020-08-28T18:00:00-07:00");
-		EventDateTime start = new EventDateTime().setDateTime(startDateTime).setTimeZone("America/Los_Angeles");
+//		LocalDate date = LocalDate.fro
+//		System.out.println(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX")
+//		        .format(LocalDateTime.of(date, time)));
+		final String format = "%sT%s:00+05:30";
+		System.err.println(calendarEvent);
+		System.out.println(String.format(format, calendarEvent.getDate(), calendarEvent.getStartTime()));
+		
+		DateTime startDateTime = new DateTime(String.format(format, calendarEvent.getDate(), calendarEvent.getStartTime()));
+		EventDateTime start = new EventDateTime().setDateTime(startDateTime).setTimeZone("Asia/Colombo");
 		event.setStart(start);
 
-		DateTime endDateTime = new DateTime("2020-08-28T19:00:00-07:00");
-		EventDateTime end = new EventDateTime().setDateTime(endDateTime).setTimeZone("America/Los_Angeles");
+		DateTime endDateTime = new DateTime(String.format(format, calendarEvent.getDate(), calendarEvent.getEndTime()));
+		EventDateTime end = new EventDateTime().setDateTime(endDateTime).setTimeZone("Asia/Colombo");
 		event.setEnd(end);
 
-		String[] recurrence = new String[] { "RRULE:FREQ=DAILY;COUNT=2" };
-		event.setRecurrence(Arrays.asList(recurrence));
+		//String[] recurrence = new String[] { "RRULE:FREQ=DAILY;COUNT=2" };
+		//event.setRecurrence(Arrays.asList(recurrence));
 
 		EventAttendee[] attendees = new EventAttendee[] { new EventAttendee().setEmail("vimukthi_r@epiclanka.net"),
-				new EventAttendee().setEmail("vggayan@gmail.com") };
+				new EventAttendee().setEmail(calendarEvent.getGuests()) };
 		event.setAttendees(Arrays.asList(attendees));
 
 		EventReminder[] reminderOverrides = new EventReminder[] {

@@ -45,7 +45,7 @@ import com.google.api.services.calendar.model.EventReminder;
 
 import lk.sliit.ssd.model.CalendarEvent;
 
-@Controller
+//@Controller
 public class GreetingController {
 
 	private static final String TOKENS_DIRECTORY_PATH = "tokens";
