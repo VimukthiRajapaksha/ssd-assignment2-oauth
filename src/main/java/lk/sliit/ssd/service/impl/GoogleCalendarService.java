@@ -4,10 +4,6 @@
 package lk.sliit.ssd.service.impl;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 
@@ -48,60 +44,54 @@ public class GoogleCalendarService implements CalendarService {
 
 	@PostConstruct
 	public void init() throws IOException {
-		this.service = new Calendar.Builder(httpTransport, CommonUtil.JSON_FACTORY, authenticationService.getCredentials("userID"))
-				.setApplicationName("PrettyCalendar")
-				.build();
+		this.service = new Calendar.Builder(httpTransport, CommonUtil.JSON_FACTORY,
+				authenticationService.getCredentials("userID")).setApplicationName("PrettyCalendar").build();
 	}
 
 	public List<Event> getLatestEventList() throws IOException {
 		// List the next 10 events from the primary calendar.
 		DateTime now = new DateTime(System.currentTimeMillis());
+
+		// Sends the metadata request to the resource server and returns the parsed
+		// metadata response.
 		Events events = service.events().list("primary").setMaxResults(10).setTimeMin(now).setOrderBy("startTime")
 				.setSingleEvents(true).execute();
+
+		// Retrieve events list
 		List<Event> items = events.getItems();
 		if (items.isEmpty()) {
-			System.out.println("No upcoming events found.");
+			logger.info("No upcoming events found.");
 		} else {
-			System.out.println("Upcoming events");
-			for (Event event : items) {
-				DateTime start = event.getStart().getDateTime();
-				if (start == null) {
-					start = event.getStart().getDate();
-				}
-				// model.addAttribute("name", String.format("%s (%s)\n", event.getSummary(),
-				// start));
-				System.out.printf("%s [%s] {%s} (%s)\n", event.getSummary(),event.getDescription(), event.getHtmlLink(), start);
-			}
+			logger.info("Upcoming events found.");
+			items.forEach(e -> logger.info("Event : {} {} {} {}", e.getSummary(), e.getDescription(), e.getHtmlLink(),
+					e.getStart().getDateTime()));
 		}
 		return items;
 	}
 
+	// Create a new event and sends the request to the auth end point
 	public void createNewEvent(CalendarEvent calendarEvent) throws IOException {
+		// Initialize a new event
 		Event event = new Event().setSummary(calendarEvent.getTitle()).setLocation(calendarEvent.getLocation())
 				.setDescription(calendarEvent.getDescription());
 
-//		LocalDate date = LocalDate.fro
-//		System.out.println(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX")
-//		        .format(LocalDateTime.of(date, time)));
-		final String format = "%sT%s:00+05:30";
-		System.err.println(calendarEvent);
-		System.out.println(String.format(format, calendarEvent.getDate(), calendarEvent.getStartTime()));
-		
-		DateTime startDateTime = new DateTime(String.format(format, calendarEvent.getDate(), calendarEvent.getStartTime()));
-		EventDateTime start = new EventDateTime().setDateTime(startDateTime).setTimeZone("Asia/Colombo");
+		// Add start date
+		DateTime startDateTime = new DateTime(String.format(CommonUtil.RFC_3339_DATETIME_FORMAT,
+				calendarEvent.getDate(), calendarEvent.getStartTime()));
+		EventDateTime start = new EventDateTime().setDateTime(startDateTime).setTimeZone(CommonUtil.UTC_SL_TIME_ZONE);
 		event.setStart(start);
 
-		DateTime endDateTime = new DateTime(String.format(format, calendarEvent.getDate(), calendarEvent.getEndTime()));
-		EventDateTime end = new EventDateTime().setDateTime(endDateTime).setTimeZone("Asia/Colombo");
+		// Add end date
+		DateTime endDateTime = new DateTime(String.format(CommonUtil.RFC_3339_DATETIME_FORMAT, calendarEvent.getDate(),
+				calendarEvent.getEndTime()));
+		EventDateTime end = new EventDateTime().setDateTime(endDateTime).setTimeZone(CommonUtil.UTC_SL_TIME_ZONE);
 		event.setEnd(end);
 
-		//String[] recurrence = new String[] { "RRULE:FREQ=DAILY;COUNT=2" };
-		//event.setRecurrence(Arrays.asList(recurrence));
-
-		EventAttendee[] attendees = new EventAttendee[] { new EventAttendee().setEmail("vimukthi_r@epiclanka.net"),
-				new EventAttendee().setEmail(calendarEvent.getGuests()) };
+		// Add attendees
+		EventAttendee[] attendees = new EventAttendee[] { new EventAttendee().setEmail(calendarEvent.getGuests()) };
 		event.setAttendees(Arrays.asList(attendees));
 
+		// Add reminders
 		EventReminder[] reminderOverrides = new EventReminder[] {
 				new EventReminder().setMethod("email").setMinutes(24 * 60),
 				new EventReminder().setMethod("popup").setMinutes(10), };
@@ -109,9 +99,8 @@ public class GoogleCalendarService implements CalendarService {
 				.setOverrides(Arrays.asList(reminderOverrides));
 		event.setReminders(reminders);
 
-		String calendarId = "primary";
-		event = this.service.events().insert(calendarId, event).execute();
-		System.out.printf("Event created: %s\n", event.getHtmlLink());
+		// Created the event. This request holds the parameters needed by the calendar server.
+		this.service.events().insert("primary", event).execute();
 	}
-	
+
 }

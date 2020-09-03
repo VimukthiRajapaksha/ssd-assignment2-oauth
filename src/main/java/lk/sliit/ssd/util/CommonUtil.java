@@ -23,5 +23,11 @@ public class CommonUtil {
 	public static final List<String> SCOPES = Collections.singletonList(CalendarScopes.CALENDAR);
 
 	public static final String GOOGLE_CALLBACK_URL = "http://localhost:8083/oauth";
+	
+	public static final String RFC_3339_DATETIME_FORMAT = "%sT%s:00+05:30";
+	public static final String UTC_SL_TIME_ZONE = "Asia/Colombo";
+	
+	public static final String REDIRECT_TO_EVENTS_PAGE = "redirect:/events";
+	public static final String ERROR = "error";
 
 }

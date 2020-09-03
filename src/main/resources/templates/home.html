@@ -7,34 +7,43 @@
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-
+  <script src="https://kit.fontawesome.com/dc483541e9.js" crossorigin="anonymous"></script>
+  <style>
+  	h3 > span {
+    	color : #e2ded3;
+    }
+  </style>
 </head>
 <body>
 
   <div class="container">
     <!-- Start Header -->
-    <div class="d-flex p-3 flex-column" style="background-color: #303a52; color: #FFFFFF; height: 150px">
-      <h3>PrettyCalendar</h3>
+    <div class="d-flex p-3 flex-column" style="background-color: #4e413b; color: #FFFFFF; height: 100px">
+      <h3>Pretty<span>Calendar</span></h3>
       <img th:src="${session.picture}" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
       <p th:text="${session.name}"></p>
     </div>
     <!-- End Header -->
 
     <!-- Start Body -->
+    <div class="d-flex p-3 justify-content-end w-100">
+          <a href="/event" class="btn btn-lg w-25" style="background-color: #e2ded3;"><span class="fas fa-plus mr-3"></span>Add new event</a>
+    </div>
+    
     <div class="d-flex p-3 justify-content-center flex-column">
 
       <!-- Start list event page -->
-      <a href="/add_calendar_event" class="btn btn-info btn-lg w-25">Add new event</a>
       <div class="container w-75 bg-light">
       <!-- If event list is not null -->
         <div th:if="${events != null and !events.empty}">
         <div class="row row-cols-4">
-          <div class="card col m-3" th:each="event : ${events}" style="border-top: 3px solid blue !important;">
+          <div class="card col m-3" th:each="event : ${events}" style="border-top: 3px solid #ff6d24 !important;">
+            <img src="/img/event.png" class="card-img-top p-2" alt="...">
             <div class="card-body">
-        <a th:href="${event.htmlLink}">
+        	<a th:href="${event.htmlLink}">
               <h5 class="card-title" th:text="${event.summary}"></h5>
             </a>
-              <h6 class="card-subtitle mb-2 text-muted" th:text="${event.start}"></h6>
+              <h6 class="card-subtitle mb-2 text-muted" th:text="${event.start.dateTime}"></h6>
               <p class="card-text" th:text="${event.description}"></p>
             </div>
           </div>
@@ -43,7 +52,7 @@
         </div>
         <!-- else event list is null -->
 <div th:unless="${events != null and !events.empty}">
-   <div class="alert alert-primary">You do not have any upcoming events.</div>
+   <div class="alert alert-primary m-3">You do not have any upcoming events.</div>
 </div>
       </div>
 

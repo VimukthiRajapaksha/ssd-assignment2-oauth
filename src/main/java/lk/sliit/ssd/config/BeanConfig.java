@@ -21,7 +21,6 @@ import com.google.api.client.http.HttpTransport;
 import com.google.api.client.util.store.DataStoreFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
 
-import lk.sliit.ssd.controller.GreetingController;
 import lk.sliit.ssd.util.CommonUtil;
 
 /**
@@ -44,7 +43,7 @@ public class BeanConfig {
 
 	@Bean
 	public GoogleClientSecrets getGoogleClientSecrets() throws IOException {
-		InputStream in = GreetingController.class.getResourceAsStream(credentialsFilePath);
+		InputStream in = BeanConfig.class.getResourceAsStream(credentialsFilePath);
 
 		if (in == null) {
 			throw new FileNotFoundException("Resource not found: " + credentialsFilePath);
@@ -60,10 +59,8 @@ public class BeanConfig {
 	@Bean
 	public GoogleAuthorizationCodeFlow getGoogleAuthorizationCodeFlow() throws IOException, GeneralSecurityException {
 		return new GoogleAuthorizationCodeFlow.Builder(getHttpTransport(), CommonUtil.JSON_FACTORY,
-				getGoogleClientSecrets(), CommonUtil.SCOPES)
-				.setDataStoreFactory(getDataStoreFactory())
-				.setAccessType("offline")
-				.build();
+				getGoogleClientSecrets(), CommonUtil.SCOPES).setDataStoreFactory(getDataStoreFactory())
+						.setAccessType("offline").build();
 	}
 
 }

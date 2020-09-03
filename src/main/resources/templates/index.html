@@ -7,24 +7,37 @@
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-
+  <script src="https://kit.fontawesome.com/dc483541e9.js" crossorigin="anonymous"></script>
+  <style>
+  	body{
+  		color : #4e413b;
+  		background-image: url('/img/index_bg.jpg');
+    	background-repeat: no-repeat;
+    	background-attachment: fixed;
+  		background-size: cover;
+  	}
+    h2 > span {
+    	color : #e2ded3;
+    }
+    
+  </style>
 </head>
 <body>
 
-  <div class="container">
+  <div class="container w-25 m-5">
     <!-- Start Header -->
-    <div class="d-flex p-3 flex-column" style="background-color: #303a52; color: #FFFFFF; height: 150px">
-      <h3>PrettyCalendar</h3>
+    <div class="d-flex p-3 flex-column align-items-center">
+    	<span class="far fa-calendar-alt p-2 mt-5"style=" font-size: 72px;"></span>
+    	<h2>Pretty<span>Calendar</span></h2>
+    	<p class="mt-5 text-center">Welcome to PrettyCalendar. Getting started is easy!</p>
+      <a href="/signin" class="btn btn-lg mt-5" style="background-color: #e2ded3;">
+      	<span>
+      		<i class="fab fa-google" style="color:#4285f4;"></i>&nbsp;&nbsp;&nbsp;Sign in with Google
+      	</span>
+      </a>
     </div>
     <!-- End Header -->
 
-    <!-- Start Body -->
-    <div class="d-flex p-3 justify-content-center flex-column">
-      <p>Getting started is easy!</p>
-      <a href="/signin" class="btn btn-light btn-lg w-25">
-      	<i class="fa fa-pencil"></i> Sign in with Google
-      </a>
-  	</div>
   </div>
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
