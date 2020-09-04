@@ -4,21 +4,11 @@
   <br>
 </h1>
 
-<p align="center">
-  <a href="https://badge.fury.io/js/pomolectron">
-    <img src="https://badge.fury.io/js/pomolectron.svg" alt="npm version" height="18">
-  </a>
-  <a href="https://chocolatey.org/packages/pomolectron">
-    <img src="https://img.shields.io/chocolatey/v/git.svg">
-  </a>
-  <a href="https://saythanks.io/to/amitmerchant1990">
-    <img src="https://img.shields.io/badge/SayThanks.io-%E2%98%BC-1EAEDB.svg">
-  </a>
-  <a href="https://www.paypal.me/AmitMerchant">
-    <img src="https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&amp;style=flat">
-  </a>
-  
-</p>
+# PrettyCalendar
+
+The PrettyCalendar is a web application that can create new calendar events and view latest calendar events. This uses OAuth 2 with authorization grant code to authorize the users. 
+
+## User Interfaces
 
 |  Landing Page  |  Home Page  |  Add Events Page  |
 |---------------------|----------------------|----------------------|
@@ -44,7 +34,7 @@ Project is created with:
 
 ## How To Use
 
-To clone and run this application, you'll need [Git](https://git-scm.com), [Java](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html), and [Maven](https://maven.apache.org/download.cgi) installed on your computer. From your command line or CMD:
+To clone and run this application, you'll need [Git](https://git-scm.com), [Java](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html), and [Maven](https://maven.apache.org/download.cgi) installed on your computer. From your command line:
 
 ```bash
 # Clone this repository
@@ -60,7 +50,7 @@ $ mvn clean package
 $ cd target
 
 # Run the app
-$ java -jar ssd-assignment2-oauth.jar
+$ java -jar ssd-assignment2-oauth-0.0.1-SNAPSHOT.jar
 
 # Access the resources
 $ Open a browser and go to http://localhost:8083/
