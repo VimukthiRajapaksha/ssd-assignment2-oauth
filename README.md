@@ -1,10 +1,8 @@
 <h1 align="center">
   <br>
-  <a href="https://github.com/amitmerchant1990/pomolectron"><img src="https://raw.githubusercontent.com/amitmerchant1990/pomolectron/master/app/res/pomolectron-transparent.png" alt="Pomolectron" width="400"></a>
+  <a href="https://github.com/VimukthiRajapaksha/ssd-assignment2-oauth"><img src="https://raw.githubusercontent.com/VimukthiRajapaksha/ssd-assignment2-oauth/development/src/main/resources/static/img/event.png" alt="Logo" width="400"></a>
   <br>
 </h1>
-
-<h4 align="center">A <a href="https://en.wikipedia.org/wiki/Pomodoro_Technique" target="_blank">pomodoro</a> app for your menubar/tray.</h4>
 
 <p align="center">
   <a href="https://badge.fury.io/js/pomolectron">
@@ -22,32 +20,31 @@
   
 </p>
 
-|  macOS            |  Windows |
-|---------------------|----------------------|
-|![pomolectron-macos](https://cloud.githubusercontent.com/assets/3647841/24491376/9250a1de-1544-11e7-86ef-82b77c006daa.png) | ![](https://raw.githubusercontent.com/amitmerchant1990/pomolectron/master/app/res/pomodoro.PNG) |
+|  Landing Page  |  Home Page  |  Add Events Page  |
+|---------------------|----------------------|----------------------|
+|![Landing Page](https://raw.githubusercontent.com/VimukthiRajapaksha/ssd-assignment2-oauth/development/src/main/resources/static/img/pages/landingPage.png) | ![Home Page](https://raw.githubusercontent.com/VimukthiRajapaksha/ssd-assignment2-oauth/development/src/main/resources/static/img/pages/homePage.png) | ![Add Events Page](https://raw.githubusercontent.com/VimukthiRajapaksha/ssd-assignment2-oauth/development/src/main/resources/static/img/pages/addEventPage.png) |
 
 ## Key Features
 
-* Pomodoro, Short break and Long break timers
-* Notifies via a system notification when time is up
-* Lives in a tray/menubar
+* Add new events to Google Calendar
+* List events from Google Calendar
+* Authenticate using Google
 * Cross platform
   - Windows, macOS and Linux ready.
-
-<a href="https://www.patreon.com/amitmerchant">
-	<img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160">
-</a>
 
 
 ## Technologies
 Project is created with:
-* Lorem version: 12.3
-* Ipsum version: 2.33
-* Ament library version: 999
-  
+* Spring Boot: 2.3.3.RELEASE
+* thymeleaf: 2.3.3
+* Spring Security: 2.3.3.RELEASE
+* Apache Maven: 3.5.4
+* JAVA: 1.8.0_144
+* OAuth: 2.0
+
 ## How To Use
 
-To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
+To clone and run this application, you'll need [Git](https://git-scm.com), [Java](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html), and [Maven](https://maven.apache.org/download.cgi) installed on your computer. From your command line or CMD:
 
 ```bash
 # Clone this repository
@@ -68,34 +65,6 @@ $ java -jar ssd-assignment2-oauth.jar
 # Access the resources
 $ Open a browser and go to http://localhost:8083/
 ```
-
-On macOS, you can install Pomolectron via [cask](http://caskroom.io/).
-
-```bash
-$ brew cask install pomolectron 
-```
-
-On Windows, you can install Pomolectron via [chocolatey](https://chocolatey.org) as well.
-
-```bash
-C:\> choco install pomolectron
-```
-
-Note: If you're using Linux Bash for Windows, [see this guide](https://www.howtogeek.com/261575/how-to-run-graphical-linux-desktop-applications-from-windows-10s-bash-shell/) or use `node` from the command prompt.
-
-## Download
-
-You can [download](https://github.com/amitmerchant1990/pomolectron/releases/tag/v1.1.0) the latest installable version of Pomolectron for Windows, Linux and macOS.
-
-You can also get the [Windows binaries](http://www.softpedia.com/get/Others/Miscellaneous/Pomolectron.shtml) from Softpedia.
-
-
-## News
-Pomolectron was [trending](https://news.ycombinator.com/item?id=13878898) on the Hacker News and on [GitHub](https://raw.githubusercontent.com/amitmerchant1990/test/master/trending.JPG) during the day of its launch.
-
-## You may also like..
-
-- [Markdownify](https://github.com/amitmerchant1990/electron-markdownify) - Markdown Editor desktop app
 
 ## License
 
